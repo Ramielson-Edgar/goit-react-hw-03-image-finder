@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { createPortal } from "react-dom";
-import PropTypes from "prop-types";
 import s from "./Modal.module.css";
 
 const modalRoot = document.querySelector("#modal-root");
@@ -19,16 +18,22 @@ class Modal extends Component {
     }
   };
   onHandleOverlayClick = (e) => {
-    console.log(e.target);
     if (e.target === e.currentTarget) {
       this.props.onClose();
     }
   };
 
   render() {
+    const { option } = this.props;
+    const { id, tags, largeImageURL } = option;
+
     return createPortal(
       <div className={s.Overlay} onClick={this.onHandleOverlayClick}>
-        <div className={s.Modal}>{this.props.children}</div>
+        <div className={s.Modal}>
+          <li className={s.list} key={id}>
+            <img src={largeImageURL} alt={tags} width="1000" height="1000" />
+          </li>
+        </div>
       </div>,
       modalRoot
     );

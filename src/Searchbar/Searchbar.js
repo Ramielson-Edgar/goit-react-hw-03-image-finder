@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import s from "./Searchbar.module.css";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import PropTypes from "prop-types";
-import services from "../services";
+import s from "./Searchbar.module.css";
 
 class Searchbar extends Component {
   state = {
@@ -16,6 +17,19 @@ class Searchbar extends Component {
   onSubmit = (e) => {
     console.log(e);
     e.preventDefault();
+    if (this.state.inputValue.trim() === "") {
+      toast.warn("🔔 Plesae enter something!", {
+        position: "top-left",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+
+      return;
+    }
 
     this.props.onSubmit(this.state.inputValue);
     this.setState({ inputValue: "" });
@@ -26,11 +40,7 @@ class Searchbar extends Component {
       <div>
         <header className={s.Searchbar}>
           <form className={s.SearchForm} onSubmit={this.onSubmit}>
-            <button
-              type="submit"
-              className={s.SearchFormButton}
-              onClick={this.addnewImg}
-            >
+            <button type="submit" className={s.SearchFormButton}>
               <span className={s.SearchFormButtonLabel}>Search</span>
             </button>
 
