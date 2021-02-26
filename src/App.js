@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import { ToastContainer } from "react-toastify";
 import PropTypes from "prop-types";
-import ImageGallery from "./ImageGallery";
-import Container from "./container";
-import Searchbar from "./Searchbar";
+import ImageGallery from "./Components/ImageGallery";
+import Container from "./Components/container";
+import Searchbar from "./Components/Searchbar";
+import ToastFallBack from "./Components/Toast";
 
 class App extends Component {
   state = {
@@ -21,6 +21,7 @@ class App extends Component {
       <Container>
         <Searchbar onSubmit={this.onHadleSubmit} />
         <ImageGallery searchQuery={this.state.searchQuery} />
+        <ToastFallBack />
       </Container>
     );
   }
@@ -34,15 +35,3 @@ App.propTypes = {
 };
 
 export default App;
-
-// <ToastContainer
-//   position="top-left"
-//   autoClose={3000}
-//   hideProgressBar={false}
-//   newestOnTop={false}
-//   closeOnClick
-//   rtl={false}
-//   pauseOnFocusLoss
-//   draggable
-//   pauseOnHover
-// />;
